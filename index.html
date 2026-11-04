@@ -37,6 +37,7 @@ nav a:hover{color:var(--text)}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
 .phone{justify-self:center;width:min(280px,70vw);aspect-ratio:9/16;border-radius:30px;border:2px solid var(--line);
   background:linear-gradient(160deg,#2a3a8a,#5b2a6e 60%,#a23a6e);position:relative;overflow:hidden}
+.phone iframe{width:100%;height:100%;display:block;border:0}
 .phone::before{content:"Your best reel plays here";position:absolute;top:18px;left:0;right:0;text-align:center;font-size:12px;color:#ffffffa0}
 .caption{position:absolute;left:0;right:0;bottom:22%;text-align:center;padding:0 14px;
   font:800 30px/1.1 "Bricolage Grotesque";text-transform:uppercase;color:#fff;
@@ -114,9 +115,12 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
         <a class="btn alt" href="#work">Watch my work</a>
       </div>
     </div>
-    <!-- Replace the placeholder with <video> of your best reel if you like -->
-    <div class="phone" aria-hidden="true">
-      <div class="caption" id="cap"></div>
+    <div class="phone">
+      <iframe
+        src="https://www.youtube.com/embed/nXk7irChy80"
+        title="Ahsan's featured reel"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
     </div>
   </header>
 </div>
@@ -215,18 +219,6 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
 <footer>© <span id="yr"></span> Ahsan</footer>
 
 <script>
-// animated caption demo
-const words = "THIS IS HOW YOUR CAPTIONS WILL POP".split(" ");
-const cap = document.getElementById("cap");
-cap.innerHTML = words.map(w => `<span>${w}</span>`).join(" ");
-const spans = [...cap.children];
-let i = 0;
-setInterval(() => {
-  spans.forEach((s, n) => s.classList.toggle("on", n === i));
-  document.getElementById("playhead").style.left = (8 + (i / (spans.length - 1)) * 84) + "%";
-  i = (i + 1) % spans.length;
-}, 650);
-
 // tabs
 document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
