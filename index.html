@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ahsan – Video Editor | Reels, Shorts & Long-form</title>
+<title>Your Name – Video Editor | Reels, Shorts & Long-form</title>
 <meta name="description" content="Video editor for reels, shorts and long-form videos. Dynamic captions, color grading and sharp cuts. Order on Fiverr.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,8 +37,8 @@ nav a:hover{color:var(--text)}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
 .phone{justify-self:center;width:min(280px,70vw);aspect-ratio:9/16;border-radius:30px;border:2px solid var(--line);
   background:linear-gradient(160deg,#2a3a8a,#5b2a6e 60%,#a23a6e);position:relative;overflow:hidden}
-.phone iframe{width:100%;height:100%;display:block;border:0}
-.phone::before{content:"Your best reel plays here";position:absolute;top:18px;left:0;right:0;text-align:center;font-size:12px;color:#ffffffa0}
+.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.phone .yt{position:absolute;inset:0;height:100%;border:0;border-radius:0;aspect-ratio:auto}
 .caption{position:absolute;left:0;right:0;bottom:22%;text-align:center;padding:0 14px;
   font:800 30px/1.1 "Bricolage Grotesque";text-transform:uppercase;color:#fff;
   -webkit-text-stroke:1px #0008;text-shadow:0 3px 0 #0006}
@@ -62,9 +62,12 @@ section h2{font-size:clamp(30px,4.4vw,48px);margin-bottom:12px}
 .grid{display:grid;gap:20px}
 .grid.reels{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
 .grid.long{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
-.item video,.item .ph{width:100%;display:block;border-radius:16px;background:var(--panel);border:1px solid var(--line);object-fit:cover}
-.reels video,.reels .ph{aspect-ratio:9/16}
-.long video,.long .ph{aspect-ratio:16/9}
+.yt{width:100%;display:grid;place-items:center;border-radius:16px;background:var(--panel) center/cover no-repeat;border:1px solid var(--line);overflow:hidden;position:relative;cursor:pointer;color:var(--muted);font-size:14px;text-align:center;padding:12px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt .play{width:56px;height:56px;border-radius:50%;background:var(--play);display:grid;place-items:center}
+.yt .play::after{content:"";border:10px solid transparent;border-left:16px solid #fff;margin-left:6px}
+.reels .yt{aspect-ratio:9/16}
+.long .yt{aspect-ratio:16/9}
 .ph{display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:14px}
 .item h3{font-size:18px;margin:12px 0 2px}
 .item p{color:var(--muted);font-size:14px}
@@ -102,7 +105,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
 
 <div class="wrap">
   <nav>
-    <b>Ahsan</b>
+    <b>Your Name</b>
     <div><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Hire me</a></div>
   </nav>
 
@@ -111,17 +114,12 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
       <h1>Videos people watch till the end.</h1>
       <p>I edit reels, shorts and long-form videos for creators and brands. Fast cuts, dynamic captions and clean color grading, delivered on time.</p>
       <div class="cta">
-        <a class="btn" href="https://www.fiverr.com/eppie_" target="_blank" rel="noopener">Order on Fiverr</a>
+        <a class="btn" href="https://www.fiverr.com/YOUR_USERNAME" target="_blank" rel="noopener">Order on Fiverr</a>
         <a class="btn alt" href="#work">Watch my work</a>
       </div>
     </div>
-    <div class="phone">
-      <iframe
-        src="https://www.youtube.com/embed/nXk7irChy80"
-        title="Ahsan's featured reel"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
-    </div>
+    <!-- INTRO VIDEO: upload intro.mp4 next to index.html (under 25 MB) -->
+    <div class="phone"><video controls playsinline preload="metadata" src="intro.mp4#t=0.1"></video></div>
   </header>
 </div>
 
@@ -139,37 +137,40 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
     </div>
 
     <!--
-      HOW TO ADD YOUR VIDEOS:
-      1. Put your compressed .mp4 files in a folder called "videos" next to this file.
-      2. Replace the src below with your file name. Add poster="videos/thumb1.jpg" for a thumbnail.
-      3. Copy a whole <div class="item">...</div> block to add more.
+      HOW TO ADD YOUR VIDEOS (YouTube):
+      1. Upload the video to YouTube (Unlisted or Public).
+      2. Copy the video ID from the link and replace VIDEO_ID below.
+         youtube.com/watch?v=ABC123xyz  ->  ABC123xyz
+         youtube.com/shorts/ABC123xyz   ->  ABC123xyz
+         youtu.be/ABC123xyz             ->  ABC123xyz
+      3. Copy a whole <div class="item">...</div> block to add more videos.
     -->
     <div class="grid reels" id="reels">
       <div class="item">
-        <video controls preload="metadata" playsinline src="videos/reel1.mp4"></video>
+        <div class="yt" data-id="VIDEO_ID"></div>
         <h3>Podcast clip with dynamic captions</h3><p>Hook cut, word-by-word captions</p>
       </div>
       <div class="item">
-        <video controls preload="metadata" playsinline src="videos/reel2.mp4"></video>
+        <div class="yt" data-id="VIDEO_ID"></div>
         <h3>Brand reel, color graded</h3><p>Fast pacing, transitions, sound design</p>
       </div>
       <div class="item">
-        <video controls preload="metadata" playsinline src="videos/reel3.mp4"></video>
+        <div class="yt" data-id="VIDEO_ID"></div>
         <h3>Talking-head short</h3><p>Jump cuts, zooms, subtitles</p>
       </div>
       <div class="item">
-        <video controls preload="metadata" playsinline src="videos/reel4.mp4"></video>
+        <div class="yt" data-id="VIDEO_ID"></div>
         <h3>Product promo reel</h3><p>Beat-synced edit</p>
       </div>
     </div>
 
     <div class="grid long" id="long" hidden>
       <div class="item">
-        <video controls preload="metadata" playsinline src="videos/long1.mp4"></video>
+        <div class="yt" data-id="VIDEO_ID"></div>
         <h3>YouTube video, 12 min</h3><p>Story cuts, b-roll, color grade</p>
       </div>
       <div class="item">
-        <video controls preload="metadata" playsinline src="videos/long2.mp4"></video>
+        <div class="yt" data-id="VIDEO_ID"></div>
         <h3>Interview edit</h3><p>Multi-cam, clean audio, lower thirds</p>
       </div>
     </div>
@@ -206,25 +207,46 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
     <div class="contact">
       <h2>Have footage that needs editing?</h2>
       <p>Send me your project details and I will reply with a clear price and delivery time.</p>
-      <a class="btn" href="https://www.fiverr.com/eppie_" target="_blank" rel="noopener">Order on Fiverr</a>
+      <a class="btn" href="https://www.fiverr.com/YOUR_USERNAME" target="_blank" rel="noopener">Order on Fiverr</a>
       <div class="links">
-        <a href="mailto:gul.in.us19@gmail.com">you@example.com</a>
-        <a href="https://wa.me/923106299566" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://instagram.com/eppie_rimshar" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:you@example.com">you@example.com</a>
+        <a href="https://wa.me/92XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </section>
 </main>
 
-<footer>© <span id="yr"></span> Ahsan</footer>
+<footer>© <span id="yr"></span> Your Name</footer>
 
 <script>
+// timeline playhead
+const ph = document.getElementById("playhead");
+let p = 0;
+setInterval(() => { p = (p + 1) % 101; ph.style.left = (8 + p * 0.84) + "%"; }, 60);
+
 // tabs
 document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
   document.getElementById("reels").hidden = b.dataset.t !== "reels";
   document.getElementById("long").hidden = b.dataset.t !== "long";
 }));
+
+// youtube click-to-play
+document.querySelectorAll(".yt").forEach(box => {
+  const id = box.dataset.id;
+  if (!id || id === "VIDEO_ID") { box.textContent = "Video ID yahan daalein"; return; }
+  box.style.backgroundImage = `url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)`;
+  box.innerHTML = '<span class="play"></span>';
+  box.setAttribute("role", "button"); box.tabIndex = 0;
+  box.setAttribute("aria-label", "Play video");
+  const load = () => {
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Video"></iframe>`;
+    box.style.cursor = "default";
+  };
+  box.addEventListener("click", load, { once: true });
+  box.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); load(); } }, { once: true });
+});
 
 document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
