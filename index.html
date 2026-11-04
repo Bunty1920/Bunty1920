@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name – Video Editor | Reels, Shorts & Long-form</title>
+<meta name="description" content="Video editor for reels, shorts and long-form videos. Dynamic captions, color grading and sharp cuts. Order on Fiverr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1530; --panel:#182048; --line:#2b366b; --text:#eef0fa; --muted:#a3abd1;
+  --play:#ff4d8d; --cap:#ffd23f;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.05;letter-spacing:-.02em}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:3px solid var(--cap);outline-offset:3px}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+nav b{font:800 20px "Bricolage Grotesque";letter-spacing:-.02em}
+nav a{text-decoration:none;color:var(--muted);margin-left:22px;font-size:15px}
+nav a:hover{color:var(--text)}
+
+.btn{display:inline-block;background:var(--play);color:#fff;font-weight:500;padding:14px 26px;border-radius:999px;text-decoration:none}
+.btn.alt{background:transparent;border:1.5px solid var(--line);color:var(--text)}
+.btn:hover{filter:brightness(1.1)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding:56px 0 72px}
+.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:800}
+.hero p{color:var(--muted);max-width:46ch;margin:22px 0 30px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.phone{justify-self:center;width:min(280px,70vw);aspect-ratio:9/16;border-radius:30px;border:2px solid var(--line);
+  background:linear-gradient(160deg,#2a3a8a,#5b2a6e 60%,#a23a6e);position:relative;overflow:hidden}
+.phone::before{content:"Your best reel plays here";position:absolute;top:18px;left:0;right:0;text-align:center;font-size:12px;color:#ffffffa0}
+.caption{position:absolute;left:0;right:0;bottom:22%;text-align:center;padding:0 14px;
+  font:800 30px/1.1 "Bricolage Grotesque";text-transform:uppercase;color:#fff;
+  -webkit-text-stroke:1px #0008;text-shadow:0 3px 0 #0006}
+.caption span{display:inline-block;margin:0 3px;opacity:.35}
+.caption span.on{opacity:1;color:var(--cap);transform:scale(1.18)}
+
+/* timeline divider */
+.timeline{height:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;margin:0 0 0;
+  background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 24px) bottom/100% 10px no-repeat}
+.timeline i{position:absolute;top:-1px;bottom:-1px;width:2px;background:var(--play);left:12%}
+.timeline i::before{content:"";position:absolute;top:-2px;left:-6px;border:7px solid transparent;border-top:9px solid var(--play)}
+
+section{padding:76px 0}
+section h2{font-size:clamp(30px,4.4vw,48px);margin-bottom:12px}
+.lead{color:var(--muted);max-width:56ch;margin-bottom:34px}
+
+/* work */
+.tabs{display:flex;gap:8px;margin-bottom:26px}
+.tabs button{font:500 15px "DM Sans";color:var(--muted);background:none;border:1.5px solid var(--line);padding:9px 20px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.grid{display:grid;gap:20px}
+.grid.reels{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.grid.long{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.item video,.item .ph{width:100%;display:block;border-radius:16px;background:var(--panel);border:1px solid var(--line);object-fit:cover}
+.reels video,.reels .ph{aspect-ratio:9/16}
+.long video,.long .ph{aspect-ratio:16/9}
+.ph{display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:14px}
+.item h3{font-size:18px;margin:12px 0 2px}
+.item p{color:var(--muted);font-size:14px}
+[hidden]{display:none!important}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.svc div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.svc h3{font-size:22px;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:15px}
+
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.tools span{border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;font-size:15px}
+.tools .main{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+/* process */
+ol.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:s}
+ol.steps li{counter-increment:s;border-left:3px solid var(--play);padding:2px 0 2px 16px}
+ol.steps li::before{content:"Step " counter(s);display:block;color:var(--muted);font-size:13px}
+ol.steps b{font:700 19px "Bricolage Grotesque"}
+ol.steps span{display:block;color:var(--muted);font-size:15px}
+
+/* contact */
+.contact{text-align:center;background:var(--panel);border-radius:28px;padding:64px 22px;margin-bottom:60px}
+.contact p{color:var(--muted);margin:14px auto 28px;max-width:44ch}
+.contact .links{margin-top:22px;font-size:15px;color:var(--muted)}
+.contact .links a{margin:0 10px}
+footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
+
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:24px}.phone{order:-1;width:min(220px,60vw)}nav a{margin-left:14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <b>Your Name</b>
+    <div><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Hire me</a></div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Videos people watch till the end.</h1>
+      <p>I edit reels, shorts and long-form videos for creators and brands. Fast cuts, dynamic captions and clean color grading, delivered on time.</p>
+      <div class="cta">
+        <a class="btn" href="https://www.fiverr.com/YOUR_USERNAME" target="_blank" rel="noopener">Order on Fiverr</a>
+        <a class="btn alt" href="#work">Watch my work</a>
+      </div>
+    </div>
+    <!-- Replace the placeholder with <video> of your best reel if you like -->
+    <div class="phone" aria-hidden="true">
+      <div class="caption" id="cap"></div>
+    </div>
+  </header>
+</div>
+
+<div class="timeline" aria-hidden="true"><i id="playhead"></i></div>
+
+<main class="wrap">
+
+  <section id="work">
+    <h2>Selected work</h2>
+    <p class="lead">Real projects for real clients. Tap play on any video.</p>
+
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-t="reels">Reels & Shorts</button>
+      <button role="tab" aria-selected="false" data-t="long">Long videos</button>
+    </div>
+
+    <!--
+      HOW TO ADD YOUR VIDEOS:
+      1. Put your compressed .mp4 files in a folder called "videos" next to this file.
+      2. Replace the src below with your file name. Add poster="videos/thumb1.jpg" for a thumbnail.
+      3. Copy a whole <div class="item">...</div> block to add more.
+    -->
+    <div class="grid reels" id="reels">
+      <div class="item">
+        <video controls preload="metadata" playsinline src="videos/reel1.mp4"></video>
+        <h3>Podcast clip with dynamic captions</h3><p>Hook cut, word-by-word captions</p>
+      </div>
+      <div class="item">
+        <video controls preload="metadata" playsinline src="videos/reel2.mp4"></video>
+        <h3>Brand reel, color graded</h3><p>Fast pacing, transitions, sound design</p>
+      </div>
+      <div class="item">
+        <video controls preload="metadata" playsinline src="videos/reel3.mp4"></video>
+        <h3>Talking-head short</h3><p>Jump cuts, zooms, subtitles</p>
+      </div>
+      <div class="item">
+        <video controls preload="metadata" playsinline src="videos/reel4.mp4"></video>
+        <h3>Product promo reel</h3><p>Beat-synced edit</p>
+      </div>
+    </div>
+
+    <div class="grid long" id="long" hidden>
+      <div class="item">
+        <video controls preload="metadata" playsinline src="videos/long1.mp4"></video>
+        <h3>YouTube video, 12 min</h3><p>Story cuts, b-roll, color grade</p>
+      </div>
+      <div class="item">
+        <video controls preload="metadata" playsinline src="videos/long2.mp4"></video>
+        <h3>Interview edit</h3><p>Multi-cam, clean audio, lower thirds</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2>What I do</h2>
+    <p class="lead">One editor for the whole video, from raw footage to the file you upload.</p>
+    <div class="svc">
+      <div><h3>Short-form editing</h3><p>Reels, TikToks and Shorts with strong hooks, tight pacing and trending-style edits.</p></div>
+      <div><h3>Dynamic captions</h3><p>Animated, word-by-word captions in your brand style. Easy to read with sound off.</p></div>
+      <div><h3>Color grading</h3><p>Consistent, cinematic color across every clip so your channel looks professional.</p></div>
+      <div><h3>Long-form editing</h3><p>YouTube videos, podcasts and interviews: cuts, b-roll, audio cleanup and thumbnails.</p></div>
+    </div>
+
+    <h3 style="font-size:20px;margin:40px 0 12px">Tools</h3>
+    <div class="tools">
+      <span class="main">CapCut</span><span>Premiere Pro</span><span>Photoshop</span>
+    </div>
+  </section>
+
+  <section id="process">
+    <h2>How we work together</h2>
+    <p class="lead">Simple, clear and no surprises.</p>
+    <ol class="steps">
+      <li><b>Send footage</b><span>Share a Drive or Dropbox link with your clips and references.</span></li>
+      <li><b>First draft</b><span>You get a draft fast, usually within the delivery time on the gig.</span></li>
+      <li><b>Revisions</b><span>Tell me what to change and I fix it until you are happy.</span></li>
+      <li><b>Final delivery</b><span>Export in the right size and format for your platform.</span></li>
+    </ol>
+  </section>
+
+  <section id="contact" style="padding-top:20px">
+    <div class="contact">
+      <h2>Have footage that needs editing?</h2>
+      <p>Send me your project details and I will reply with a clear price and delivery time.</p>
+      <a class="btn" href="https://www.fiverr.com/YOUR_USERNAME" target="_blank" rel="noopener">Order on Fiverr</a>
+      <div class="links">
+        <a href="mailto:you@example.com">you@example.com</a>
+        <a href="https://wa.me/92XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="yr"></span> Your Name</footer>
+
+<script>
+// animated caption demo
+const words = "THIS IS HOW YOUR CAPTIONS WILL POP".split(" ");
+const cap = document.getElementById("cap");
+cap.innerHTML = words.map(w => `<span>${w}</span>`).join(" ");
+const spans = [...cap.children];
+let i = 0;
+setInterval(() => {
+  spans.forEach((s, n) => s.classList.toggle("on", n === i));
+  document.getElementById("playhead").style.left = (8 + (i / (spans.length - 1)) * 84) + "%";
+  i = (i + 1) % spans.length;
+}, 650);
+
+// tabs
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+  document.getElementById("reels").hidden = b.dataset.t !== "reels";
+  document.getElementById("long").hidden = b.dataset.t !== "long";
+}));
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
