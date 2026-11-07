@@ -45,9 +45,15 @@ nav a:hover{color:var(--cap)}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
 .hero-note{display:flex;gap:22px;margin-top:40px;color:var(--muted);font-size:13px}
 .hero-note strong{display:block;color:var(--text);font:700 22px "Bricolage Grotesque"}
-.phone{justify-self:center;width:min(300px,70vw);aspect-ratio:9/16;border-radius:18px;border:1px solid #ffffff38;
-  background:linear-gradient(160deg,#273346,#17232a 60%,#3b1e20);position:relative;overflow:hidden;box-shadow:var(--shadow);transform:rotate(3deg)}
+.showreel{justify-self:center;width:min(330px,72vw);padding:10px;background:#0d1017;border:1px solid #ffffff24;border-radius:12px;box-shadow:var(--shadow)}
+.showreel-top,.showreel-foot{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 5px 9px}
+.showreel-foot{padding:9px 5px 2px;color:var(--cap)}
+.showreel-top::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--play);box-shadow:12px 0 #f1c84b,24px 0 #7bd68b;margin-right:auto}
+.showreel-top span:first-child{margin-left:34px}
+.phone{width:100%;aspect-ratio:9/16;border-radius:7px;border:1px solid #ffffff38;
+  background:linear-gradient(160deg,#273346,#17232a 60%,#3b1e20);position:relative;overflow:hidden}
 .phone::before{content:"SHOWREEL / 2024";position:absolute;z-index:2;top:15px;left:16px;font-size:10px;letter-spacing:.12em;color:#fff9}
+.phone::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:35%;background:linear-gradient(transparent,#08090dcc);pointer-events:none}
 .phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .phone .yt{position:absolute;inset:0;height:100%;border:0;border-radius:0;aspect-ratio:auto}
 .caption{position:absolute;left:0;right:0;bottom:22%;text-align:center;padding:0 14px;
@@ -112,7 +118,7 @@ ol.steps span{display:block;color:var(--muted);font-size:15px}
 .contact .links a{margin:0 10px}
 footer{text-align:center;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-bottom:40px}
 
-@media(max-width:760px){.wrap{padding:0 20px}.hero{grid-template-columns:1fr;gap:46px;padding:64px 0 76px}.phone{order:-1;width:min(230px,62vw)}nav{align-items:flex-start}nav a{margin-left:12px;font-size:12px}.hero-note{margin-top:30px}.hero h1{font-size:clamp(44px,14vw,68px)}section{padding:78px 0}}
+@media(max-width:760px){.wrap{padding:0 20px}.hero{grid-template-columns:1fr;gap:46px;padding:64px 0 76px}.showreel{order:-1;width:min(260px,72vw)}nav{align-items:flex-start}nav a{margin-left:12px;font-size:12px}.hero-note{margin-top:30px}.hero h1{font-size:clamp(44px,14vw,68px)}section{padding:78px 0}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -136,7 +142,11 @@ footer{text-align:center;color:var(--muted);font-size:12px;letter-spacing:.08em;
       <div class="hero-note"><div><strong>50+</strong>projects cut</div><div><strong>24h</strong>first response</div><div><strong>4K</strong>delivery ready</div></div>
     </div>
     <!-- INTRO VIDEO: upload intro.mp4 next to index.html (under 25 MB) -->
-    <div class="phone"><video controls playsinline preload="metadata" src="intro.mp4#t=0.1"></video></div>
+    <div class="showreel">
+      <div class="showreel-top"><span>SHOWREEL_01</span><span>00:00:00:00</span></div>
+      <div class="phone"><video controls playsinline preload="metadata" src="intro.mp4#t=0.1"></video></div>
+      <div class="showreel-foot"><span>SHORT-FORM / COLOR / CUTS</span><span>4K</span></div>
+    </div>
   </header>
 </div>
 
@@ -257,12 +267,27 @@ document.querySelectorAll(".yt").forEach(box => {
   box.setAttribute("role", "button"); box.tabIndex = 0;
   box.setAttribute("aria-label", "Play video");
   const load = () => {
-    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Video"></iframe>`;
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Video"></iframe>`;
     box.style.cursor = "default";
   };
   box.addEventListener("click", load, { once: true });
   box.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); load(); } }, { once: true });
 });
+
+// Pause every portfolio video when its frame leaves the viewport.
+const videoObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) return;
+    if (entry.target.tagName === "VIDEO") {
+      entry.target.pause();
+      return;
+    }
+    const iframe = entry.target.querySelector("iframe");
+    if (iframe) iframe.contentWindow.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "*");
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".phone video, .yt").forEach(videoObserver.observe.bind(videoObserver));
 
 document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
