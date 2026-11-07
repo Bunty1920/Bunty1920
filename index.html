@@ -10,33 +10,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0f1530; --panel:#182048; --line:#2b366b; --text:#eef0fa; --muted:#a3abd1;
-  --play:#ff4d8d; --cap:#ffd23f;
+  --bg:#08090d; --panel:#11141c; --panel-2:#171b26; --line:#2a2f3d; --text:#f7f7f2; --muted:#9da3b2;
+  --play:#ff5b36; --cap:#d8ff3e; --cyan:#7ce6ff; --shadow:0 24px 70px #0008;
 }
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
+body{background:var(--bg);color:var(--text);font:400 17px/1.6 "DM Sans",system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(to bottom,#000,transparent 70%);z-index:-1}
 h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.05;letter-spacing:-.02em}
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-:focus-visible{outline:3px solid var(--cap);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:3px solid var(--cap);outline-offset:4px}
 
-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
-nav b{font:800 20px "Bricolage Grotesque";letter-spacing:-.02em}
-nav a{text-decoration:none;color:var(--muted);margin-left:22px;font-size:15px}
-nav a:hover{color:var(--text)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid #ffffff12}
+nav b{font:800 21px "Bricolage Grotesque";letter-spacing:-.02em}
+nav b::after{content:" / EDITOR";color:var(--play);font-size:11px;letter-spacing:.12em;margin-left:5px}
+nav a{text-decoration:none;color:var(--muted);margin-left:26px;font-size:14px;transition:color .2s}
+nav a:hover{color:var(--cap)}
 
-.btn{display:inline-block;background:var(--play);color:#fff;font-weight:500;padding:14px 26px;border-radius:999px;text-decoration:none}
-.btn.alt{background:transparent;border:1.5px solid var(--line);color:var(--text)}
-.btn:hover{filter:brightness(1.1)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--play);color:#fff;font-weight:500;padding:14px 24px;border-radius:8px;text-decoration:none;box-shadow:0 10px 24px #ff5b3633;transition:transform .2s,box-shadow .2s}
+.btn::after{content:"↗";font-size:18px;line-height:0}
+.btn.alt{background:transparent;border:1px solid var(--line);color:var(--text);box-shadow:none}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px #ff5b3650}
+.btn.alt:hover{border-color:var(--cap);color:var(--cap);box-shadow:none}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;padding:56px 0 72px}
-.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:800}
-.hero p{color:var(--muted);max-width:46ch;margin:22px 0 30px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center;padding:92px 0 100px;position:relative}
+.hero::after{content:"";position:absolute;width:420px;height:420px;right:5%;top:10%;background:var(--play);filter:blur(130px);opacity:.12;z-index:-1}
+.hero h1{font-size:clamp(46px,7vw,86px);font-weight:800;max-width:760px}
+.hero h1 em{font-style:normal;color:var(--cap)}
+.hero p{color:var(--muted);max-width:48ch;margin:26px 0 32px;font-size:18px}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--cap);font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--cap)}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
-.phone{justify-self:center;width:min(280px,70vw);aspect-ratio:9/16;border-radius:30px;border:2px solid var(--line);
-  background:linear-gradient(160deg,#2a3a8a,#5b2a6e 60%,#a23a6e);position:relative;overflow:hidden}
+.hero-note{display:flex;gap:22px;margin-top:40px;color:var(--muted);font-size:13px}
+.hero-note strong{display:block;color:var(--text);font:700 22px "Bricolage Grotesque"}
+.phone{justify-self:center;width:min(300px,70vw);aspect-ratio:9/16;border-radius:18px;border:1px solid #ffffff38;
+  background:linear-gradient(160deg,#273346,#17232a 60%,#3b1e20);position:relative;overflow:hidden;box-shadow:var(--shadow);transform:rotate(3deg)}
+.phone::before{content:"SHOWREEL / 2024";position:absolute;z-index:2;top:15px;left:16px;font-size:10px;letter-spacing:.12em;color:#fff9}
 .phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .phone .yt{position:absolute;inset:0;height:100%;border:0;border-radius:0;aspect-ratio:auto}
 .caption{position:absolute;left:0;right:0;bottom:22%;text-align:center;padding:0 14px;
@@ -46,58 +57,62 @@ nav a:hover{color:var(--text)}
 .caption span.on{opacity:1;color:var(--cap);transform:scale(1.18)}
 
 /* timeline divider */
-.timeline{height:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;margin:0 0 0;
-  background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 24px) bottom/100% 10px no-repeat}
+.timeline{height:42px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;margin:0 0 0;
+  background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 24px) bottom/100% 12px no-repeat}
 .timeline i{position:absolute;top:-1px;bottom:-1px;width:2px;background:var(--play);left:12%}
 .timeline i::before{content:"";position:absolute;top:-2px;left:-6px;border:7px solid transparent;border-top:9px solid var(--play)}
 
-section{padding:76px 0}
-section h2{font-size:clamp(30px,4.4vw,48px);margin-bottom:12px}
+section{padding:104px 0}
+section h2{font-size:clamp(34px,4.8vw,56px);margin-bottom:14px}
 .lead{color:var(--muted);max-width:56ch;margin-bottom:34px}
 
 /* work */
 .tabs{display:flex;gap:8px;margin-bottom:26px}
-.tabs button{font:500 15px "DM Sans";color:var(--muted);background:none;border:1.5px solid var(--line);padding:9px 20px;border-radius:999px;cursor:pointer}
-.tabs button[aria-selected=true]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.tabs button{font:500 14px "DM Sans";color:var(--muted);background:none;border:1px solid var(--line);padding:10px 18px;border-radius:5px;cursor:pointer;transition:all .2s}
+.tabs button[aria-selected=true]{background:var(--cap);color:var(--bg);border-color:var(--cap)}
 .grid{display:grid;gap:20px}
 .grid.reels{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
 .grid.long{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
-.yt{width:100%;display:grid;place-items:center;border-radius:16px;background:var(--panel) center/cover no-repeat;border:1px solid var(--line);overflow:hidden;position:relative;cursor:pointer;color:var(--muted);font-size:14px;text-align:center;padding:12px}
+.yt{width:100%;display:grid;place-items:center;border-radius:8px;background:var(--panel) center/cover no-repeat;border:1px solid var(--line);overflow:hidden;position:relative;cursor:pointer;color:var(--muted);font-size:14px;text-align:center;padding:12px;filter:saturate(.8);transition:transform .25s,filter .25s,border-color .25s}
+.yt::after{content:"PLAY REEL";position:absolute;top:12px;right:12px;color:#fff;background:#08090dbb;border:1px solid #fff4;padding:4px 7px;font-size:9px;letter-spacing:.12em}
+.item:hover .yt{transform:translateY(-5px);filter:saturate(1.15);border-color:var(--play)}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.yt .play{width:56px;height:56px;border-radius:50%;background:var(--play);display:grid;place-items:center}
+.yt .play{width:58px;height:58px;border-radius:50%;background:var(--play);display:grid;place-items:center;box-shadow:0 8px 26px #0008}
 .yt .play::after{content:"";border:10px solid transparent;border-left:16px solid #fff;margin-left:6px}
 .reels .yt{aspect-ratio:9/16}
 .long .yt{aspect-ratio:16/9}
 .ph{display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:14px}
-.item h3{font-size:18px;margin:12px 0 2px}
+.item h3{font-size:19px;margin:14px 0 3px}
 .item p{color:var(--muted);font-size:14px}
 [hidden]{display:none!important}
 
 /* services */
 .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.svc div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.svc div{background:linear-gradient(145deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:8px;padding:26px;position:relative;overflow:hidden}
+.svc div::before{content:"";position:absolute;top:0;left:0;width:42px;height:3px;background:var(--play)}
 .svc h3{font-size:22px;margin-bottom:8px}
 .svc p{color:var(--muted);font-size:15px}
 
 .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.tools span{border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;font-size:15px}
+.tools span{border:1px solid var(--line);border-radius:4px;padding:7px 16px;font-size:15px}
 .tools .main{background:var(--text);color:var(--bg);border-color:var(--text)}
 
 /* process */
 ol.steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:s}
-ol.steps li{counter-increment:s;border-left:3px solid var(--play);padding:2px 0 2px 16px}
-ol.steps li::before{content:"Step " counter(s);display:block;color:var(--muted);font-size:13px}
+ol.steps li{counter-increment:s;border-top:1px solid var(--line);padding:18px 0 2px}
+ol.steps li::before{content:"0" counter(s);display:block;color:var(--play);font:700 28px "Bricolage Grotesque";margin-bottom:20px}
 ol.steps b{font:700 19px "Bricolage Grotesque"}
 ol.steps span{display:block;color:var(--muted);font-size:15px}
 
 /* contact */
-.contact{text-align:center;background:var(--panel);border-radius:28px;padding:64px 22px;margin-bottom:60px}
+.contact{text-align:center;background:linear-gradient(135deg,#171b26,#0d1017);border:1px solid var(--line);border-radius:12px;padding:76px 22px;margin-bottom:60px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;width:260px;height:260px;left:-80px;top:-100px;background:var(--cyan);filter:blur(110px);opacity:.12}
 .contact p{color:var(--muted);margin:14px auto 28px;max-width:44ch}
 .contact .links{margin-top:22px;font-size:15px;color:var(--muted)}
 .contact .links a{margin:0 10px}
-footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
+footer{text-align:center;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-bottom:40px}
 
-@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:24px}.phone{order:-1;width:min(220px,60vw)}nav a{margin-left:14px}}
+@media(max-width:760px){.wrap{padding:0 20px}.hero{grid-template-columns:1fr;gap:46px;padding:64px 0 76px}.phone{order:-1;width:min(230px,62vw)}nav{align-items:flex-start}nav a{margin-left:12px;font-size:12px}.hero-note{margin-top:30px}.hero h1{font-size:clamp(44px,14vw,68px)}section{padding:78px 0}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -111,12 +126,14 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding-bottom:40px}
 
   <header class="hero">
     <div>
-      <h1>Videos people watch till the end.</h1>
+      <div class="eyebrow">Story-first video editor</div>
+      <h1>Videos people <em>watch</em> till the end.</h1>
       <p>I edit reels, shorts and long-form videos for creators and brands. Fast cuts, dynamic captions and clean color grading, delivered on time.</p>
       <div class="cta">
         <a class="btn" href="https://www.fiverr.com/eppie_" target="_blank" rel="noopener">Order on Fiverr</a>
         <a class="btn alt" href="#work">Watch my work</a>
       </div>
+      <div class="hero-note"><div><strong>50+</strong>projects cut</div><div><strong>24h</strong>first response</div><div><strong>4K</strong>delivery ready</div></div>
     </div>
     <!-- INTRO VIDEO: upload intro.mp4 next to index.html (under 25 MB) -->
     <div class="phone"><video controls playsinline preload="metadata" src="intro.mp4#t=0.1"></video></div>
